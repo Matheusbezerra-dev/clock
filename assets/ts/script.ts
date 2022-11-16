@@ -11,8 +11,16 @@ const updateClock = (): void => {
   const second: number = now.getSeconds();
 
   clockDigital.innerHTML = `${formatedTime(hour)}:${formatedTime(minute)}:${formatedTime(second)}`;
-}
 
+  // Clock analogic
+  const sDeg: number = ((360 / 60) * second) -90;
+  const mDeg: number = ((360 / 60) * minute) -90;
+  const hDeg: number = ((360 / 12) * hour) -90;
+
+  secondElement.style.transform = `rotate(${sDeg}deg)`;
+  minuteElement.style.transform = `rotate(${mDeg}deg)`;
+  hoursElement.style.transform =`rotate(${hDeg}deg)`;
+}
 const formatedTime = (time: number): string | number => time < MAGICNUMBER ? `0${time}` : time;
 
 setInterval(updateClock, 1000);
